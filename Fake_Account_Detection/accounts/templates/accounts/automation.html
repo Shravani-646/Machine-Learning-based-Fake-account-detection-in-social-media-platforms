@@ -1,0 +1,188 @@
+{% extends 'accounts/navbar.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+<title>Prediction Form</title>
+<style>
+body{
+   font-family: 'Roboto', sans-serif;
+   /* background: linear-gradient(90deg, rgba(6,190,182,1) 0%, rgba(72,177,191,1) 100%); */
+   background: rgba(94, 29, 216,1.0);
+}
+/* .prediction-form{
+    background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+} */
+.login-form {
+    width: 700px;
+    margin: 50px auto;
+    padding: 50px 0px 50px 0px;
+  	font-size: 15px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {        
+    font-size: 15px;
+    font-weight: bold;
+    background: rgba(94, 29, 216,1.0);
+    color : #fff;
+}
+.btn:hover{
+    background: rgba(94, 29, 216,0.8);
+    color : #fff;
+}
+.container { 
+        position: relative; 
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url('{% static "media/social_media.jpg" %}');
+        background-size: cover;
+    }
+
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background: rgba(94, 29, 216, 0.7);
+    }
+    h2 {
+        position: relative;
+        color: #ffffff;  
+        font-size: 3rem;
+        line-height: 0.9;
+        text-align: center;
+    }
+    #info_link{
+        color: linear-gradient(to bottom right, rgba(255, 255, 255, 1.0), rgba(135, 116, 243, 0.7));
+        text-decoration: underline;
+    }
+</style>
+{% endblock title %}
+
+{% block nav_item %}
+<a href="#" class="navbar-brand">Hello, <b>{{request.user.username}}</b></a>
+{% endblock nav_item %}
+{% block content %}
+<div class="prediction-form">
+    <div class="login-form">
+        <a href="#" onclick="show_info()" id="info_link" class="link-light">Info</a>
+        <div id = "info-msg_box" class="alert alert-info" role="alert" style="display: none;" onclick="close_div()">
+            This feature supports Twitter, Quora and Pinterest.
+          </div>
+        <form action="" method="POST">
+            {%csrf_token%}
+            <h3 class="text-center">UserInput Form</h3>       
+            <div class="form-group">
+                <label>Enter the URL: </label>
+                {{form.profile_url}}
+            </div>
+           
+            <!-- dropdown for languages-->
+            <!-- <div style="margin-bottom: 10px;" class="dropdown">
+                <label>Select The Platform:</label>
+                {{form.platform|add_class:'btn btn-secondary dropdown-toggle'}}
+                    
+            </div> -->
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-block">Predict</button>
+            </div>
+                
+               
+            </div>        
+        </form>
+        
+    </div>
+</div>
+{% endblock content %}
+{% block script %}
+<script>
+    let ele1 = document.getElementById("info_link");
+    let ele2 = document.getElementById("info-msg_box");
+    function show_info(){
+        ele1.style.display = "none";
+        ele2.style.display = "block";
+    }
+    function close_div(){
+        ele1.style.display = "block";
+        ele2.style.display = "none";
+    }
+</script>
+{% endblock script%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+</head>
+<body>
+    <h1>Hello world</h1>
+    <form action="" method="POST">
+        {%csrf_token%}
+        <label>Enter a username</label>
+        {{form.username}}<br>
+        {{form.platform}}
+        <button>Predict</button>
+    </form>
+</body>
+</html> -->

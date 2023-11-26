@@ -1,0 +1,290 @@
+{% extends 'accounts/navbar.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+<title>Result Page</title>
+<style>
+   .col{
+		height:100px;
+		background: #413543;
+		color : #F6F1F1;
+		margin : 10px;
+		font-size : 50px;
+		display: flex;
+		align-items: center;
+    	justify-content: center;
+	}
+	.results-box{
+		width:500px;
+		height : 260px;
+		overflow-y : auto;
+		overflow-x: auto;
+		margin-bottom : 10px;
+	}
+	
+	
+	.info{
+	  width : 600px;
+	  border : 2px solid #212529;
+	  }
+
+	#myDIV { 
+	  position: relative;
+	  
+	}
+
+	#myDIV {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+ 
+    /* #profileDiv{
+        position: relative;
+    }
+    #profileDiv{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    } */
+	.except {
+		background: white;
+		position: relative;
+		z-index: 9999;
+	}
+
+	.backdrop {
+		position: fixed;
+		z-index: 9998;
+		top: 0; bottom: 0; left: 0; right: 0;
+		background: #33333377;
+		backdrop-filter: blur(4px);
+	}
+.one_profile{
+  width: 200px;
+}
+.msg{
+	text-align: center;
+}
+</style>
+{% endblock title %}
+{% block content %}
+
+	{% if count == 0 %}
+	<div class="msg alert alert-success">
+		<h3>Your profile is not cloned.</h3>
+	</div>
+	{% else %}
+	<div class="msg alert alert-danger" role="alert">
+		<h3>Your profile is cloned.</h3>
+    </div>
+	{% endif %}
+
+
+  <div class="container h-100 d-flex justify-content-center">
+	  
+		  <!-- <div class="row">
+			<div class="col" "mt-3" onclick="myFunction()">1</div>
+			<div class="col">2</div>
+			<div class="col">3</div>
+			<div class="w-100"></div>
+			<div class="col">4</div>
+			<div class="col">5</div>
+			<div class="col">6</div>
+		  </div>
+		  
+		  <div class="row">
+			<div class="col" "mt-3">7</div>
+			<div class="col">8</div>
+			<div class="col">9</div>
+			<div class="w-100"></div>
+			<div class="col">10</div>
+			<div class="col">11</div>
+			<div class="col">12</div>
+		  </div> -->
+		  
+		  {%if profile_names %}
+		  <div class="results-box">
+		  {% for k,v in profile_names.items %}
+			
+		  <div class="row">
+			{% if v|length == 6%}
+			  <div class="col" onclick="myFunction('{{v.0}}','info1')">{{v.0|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.1}}','info1')">{{v.1|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.2}}','info1')">{{v.2|last}}</div>
+			  <div class="w-100"></div>
+			  <div class="col" onclick="myFunction('{{v.3}}','info1')">{{v.3|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.4}}','info1')">{{v.4|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.5}}','info1')">{{v.5|last}}</div>
+			{%elif v|length == 5%}
+			<div class="col" onclick="myFunction('{{v.0}}','info1')">{{v.0|last}}</div>
+			<div class="col" onclick="myFunction('{{v.1}}','info1')">{{v.1|last}}</div>
+			<div class="col" onclick="myFunction('{{v.2}}','info1')">{{v.2|last}}</div>
+			<div class="w-100"></div>
+			<div class="col" onclick="myFunction('{{v.3}}','info1')">{{v.3|last}}</div>
+			<div class="col" onclick="myFunction('{{v.4}}','info1')">{{v.4|last}}</div>
+			{%elif v|length == 4%}
+			  <div class="col" onclick="myFunction('{{v.0}}','info1')">{{v.0|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.1}}','info1')">{{v.1|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.2}}','info1')">{{v.2|last}}</div>
+			  <div class="w-100"></div>
+			  <div class="col" onclick="myFunction('{{v.3}}','info1')">{{v.3|last}}</div>
+		  {%elif v|length == 3%}
+			  <div class="col" onclick="myFunction('{{v.0}}','info1')">{{v.0|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.1}}','info1')">{{v.1|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.2}}','info1')">{{v.2|last}}</div>  
+		  {%elif v|length == 2%}
+			  <div class="col" onclick="myFunction('{{v.0}}','info1')">{{v.0|last}}</div>
+			  <div class="col" onclick="myFunction('{{v.1}}','info1')">{{v.1|last}}</div>
+			  
+		  {%elif v|length == 1%}
+		   
+			  <div class="col" style="margin : 90px 0px 0px 170px;" onclick="myFunction('{{v.0}}','info1');">{{v.0|last}}</div>
+			  <div class="col" style="visibility: hidden;" onclick="myFunction('{{v.2}}','info1')">0</div>
+			
+		  {% endif %}
+		  </div>
+	 
+   
+		  {% endfor %}
+		  {%endif%}
+		  </div>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  <div class="col-md-12 text-center">
+  <button type="button" class="btn btn-dark" onclick="myFunction('myDIV','info1')">Show Input Details</button>
+  <!-- input details table -->
+  
+  <div id="myDIV" class="except" style="display: none;">
+	  <div class="info">
+	   <table class="table">
+	  <thead class="thead-dark">
+		<tr>
+		  <th scope="col">Input Details</th>
+		  <th scope="col">
+		   <button type="button" onclick="close_the_window('myDIV','info1')" class="close text-light" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+		  </th>
+		</tr>
+	  </thead>
+	  <tbody>
+		  
+		<tr>
+		  <th scope="row">Name</th>
+		  <td>{{input_from_user.0}}</td>
+		  
+		</tr>
+		<tr>
+		  <th scope="row">Username</th>
+		  <td>{{input_from_user.1}}</td>
+		  
+		</tr>
+		<tr>
+		  <th scope="row">Language</th>
+		  <td>{{input_from_user.2}}</td>
+		</tr>
+		<tr>
+		  <th scope="row">Location</th>
+		  <td>{{input_from_user.3}}</td>
+		</tr>
+		
+	  </tbody>
+	</table>
+	  </div>
+	</div>
+	<div id="info1"></div>
+  
+  <!-- input details table end -->
+  </div>
+  
+  {% for i,k in data.items%}
+	  
+  <div id={{i}} class="except" style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);display: none;">
+	  <div class="info">
+	  <table class="table">
+	  <thead class="thead-dark">
+	  <tr>
+		  <th scope="col">Profile {{i|last}}</th>
+		  <th scope="col">
+		  <button type="button" onclick="close_the_window('{{i}}','info1')" class="close text-light" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+  </button>
+		  </th>
+	  </tr>
+	  </thead>
+	  <tbody>
+		  
+	  <tr>
+		  
+		  
+		  <th scope="row">Name</th>
+		  <td>{{k.0}}</td>
+		  
+	  </tr>
+	  <tr>
+		  <th scope="row">Username</th>
+		  <td>{{k.1}}</td>
+		  
+	  </tr>
+	  <tr>
+		  <th scope="row">Language</th>
+		  <td>{{k.2}}</td>
+	  </tr>
+	  <tr>
+		  <th scope="row">Location</th>
+		  <td>{{k.3}}</td>
+	  </tr>
+	  <tr>
+		  <th scope="row">Similarity</th>
+		  <td>{{k.4}}%</td>
+	  </tr>
+	  
+	  </tbody>
+  </table>
+	  </div>
+  </div>
+  <div id="info1"></div>
+  
+  <!-- input details table end -->
+  {% endfor %}
+  
+ {% endblock content %}
+ {% block script %}
+ <script>
+	function myFunction(element1,element2) {
+	  var x = document.getElementById(element1);
+	  console.log(x.className);
+	  if (x.style.display === "none") {
+		x.style.display = "block";
+	  } else {
+		x.style.display = "none";
+	  }
+	  x.classList.add("except");
+	  var info = document.getElementById(element2);
+	  info.classList.add("backdrop");
+	}
+	function close_the_window(element1,element2){
+	  var x = document.getElementById(element1);
+	  if (x.style.display === "none") {
+		x.style.display = "block";
+	  } else {
+		x.style.display = "none";
+	  }
+	  var info = document.getElementById(element2);
+	  info.classList.remove("backdrop");  
+	}
+	
+	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock script%}

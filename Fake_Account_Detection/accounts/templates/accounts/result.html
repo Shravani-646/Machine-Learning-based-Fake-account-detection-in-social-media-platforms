@@ -1,0 +1,70 @@
+{% extends 'accounts/navbar.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+<title>Result Page</title>
+<style>
+    body{
+    font-family: 'Roboto', sans-serif;
+   /* background: linear-gradient(90deg, rgba(6,190,182,1) 0%, rgba(72,177,191,1) 100%); */
+    /* background: linear-gradient(to bottom right, rgba(71, 41, 237, 1.0), rgba(94, 29, 216, 1.0)); */
+}
+    .box-1{
+        /* height: 610px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .inner-container{
+        height: 400px;
+        width: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .result{
+        font-size: 30px;
+        margin-top: 90px;
+        margin-left : 45px;
+    }
+    .result1{
+        height : 300px;
+        width : 500px;
+        
+    }
+    .btn {     
+    min-height: 38px;
+    border-radius: 2px;
+    width: max-content;   
+    font-size: 15px;
+    font-weight: bold;
+    background: rgba(94, 29, 216,1.0);
+    color : #fff;
+   }
+    .btn:hover{
+    background: rgba(94, 29, 216,0.8);
+    color : #fff;
+    }
+</style>
+{% endblock title %}
+{% block content %}
+    <div class="box-1">
+        <div class="d-flex justify-content-center align-items-center inner-container">
+            {% if 'Fraudulent' in result %}
+            <div class="result1 alert alert-danger" role="alert">
+                <p style="color:#FF6464;" class="result">{{result}}</p>
+            </div>
+            {% else %}
+            <div class="result1 alert alert-success">
+                <p style="color:#62D2A2;" class="result">{{result}}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="text-center">
+    <a href="{% url 'explanation'%}" target="_blank" class="btn" role="button">Show Details</a>
+    </div>
+    <!-- <div class="text-center">
+        <button type="button" class="btn">Show Details</button>
+    </div> -->
+{% endblock content %}

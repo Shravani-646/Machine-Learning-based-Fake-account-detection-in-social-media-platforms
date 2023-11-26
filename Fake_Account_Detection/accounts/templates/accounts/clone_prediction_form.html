@@ -1,0 +1,134 @@
+{% extends 'accounts/navbar.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+<title>Clone Prediction Form</title>
+<style>
+body{
+   font-family: 'Roboto', sans-serif;
+    background: #8946B5;
+    background: -webkit-linear-gradient(top left, #8946B5, #551793);
+    background: -moz-linear-gradient(top left, #8946B5, #551793);
+    background: linear-gradient(to bottom right, #8946B5, #551793);
+   
+}
+/* .prediction-form{
+    background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+} */
+.login-form {
+    width: 700px;
+    margin: 50px auto;
+    padding: 50px 0px 50px 0px;
+  	font-size: 15px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {        
+    font-size: 15px;
+    font-weight: bold;
+    background: #8946B5;
+    color : #fff;
+}
+.btn:hover{
+    background: #8946B5;
+    color : #fff;
+}
+.container { 
+        position: relative; 
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url('{% static "media/social_media.jpg" %}');
+        background-size: cover;
+    }
+
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgb(137,70,181,0.7);
+
+       
+    }
+    h2 {
+        position: relative;
+        color: #ffffff;  
+        font-size: 3rem;
+        line-height: 0.9;
+        text-align: center;
+    }
+</style>
+{% endblock title %}
+
+{% block nav_item %}
+<a href="#" class="navbar-brand">Hello, <b>{{request.user.username}}</b></a>
+{% endblock nav_item %}
+{% block content %}
+<div class="container">
+    <h2>MACHINE LEARNING BASED FRAUDULENT AND CLONE ACCOUNTS DETECTION IN SOCIAL MEDIA PLATFORMS</h2>
+</div>
+<div class="prediction-form">
+    <div class="login-form">
+        <form action="" method="POST">
+            {%csrf_token%}
+            <h3 class="text-center">Clone Prediction Form</h3>       
+            <div class="form-group">
+                <label>Name:</label>
+                <!-- <input type="text" class="form-control" placeholder="Eg-25" required="required"> -->
+                {{form.name}}
+            </div>
+
+            
+            <div class="form-group">
+                <label>Screen Name:</label>
+                {{form.screen_name}}
+            </div>
+            
+            <!-- dropdown for languages-->
+            <div style="margin-bottom: 10px;" class="dropdown">
+                <label>Select Language:</label>
+                {{form.language|add_class:'btn btn-secondary dropdown-toggle'}}
+                    
+            </div>
+
+            <div class="form-group">
+                <label>Location:</label>
+                {{form.location}}
+            </div>
+            
+            <!-- <div class="form-group">
+                <label>Timezone:</label>
+                {{form.timezone}}
+            </div>        -->
+                      
+            
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-block">Predict</button>
+            </div>
+                
+               
+            </div>        
+        </form>
+        
+    </div>
+</div>
+{% endblock content %}
+

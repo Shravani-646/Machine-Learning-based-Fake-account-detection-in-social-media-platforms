@@ -1,0 +1,148 @@
+{% extends 'accounts/navbar.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+<title>Prediction Form</title>
+<style>
+body{
+   font-family: 'Roboto', sans-serif;
+   /* background: linear-gradient(90deg, rgba(6,190,182,1) 0%, rgba(72,177,191,1) 100%); */
+   background: rgba(94, 29, 216,1.0);
+}
+/* .prediction-form{
+    background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+} */
+.login-form {
+    width: 700px;
+    margin: 50px auto;
+    padding: 50px 0px 50px 0px;
+  	font-size: 15px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {        
+    font-size: 15px;
+    font-weight: bold;
+    background: rgba(94, 29, 216,1.0);
+    color : #fff;
+}
+.btn:hover{
+    background: rgba(94, 29, 216,0.8);
+    color : #fff;
+}
+.container { 
+        position: relative; 
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url('{% static "media/social_media.jpg" %}');
+        background-size: cover;
+    }
+
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background: rgba(94, 29, 216, 0.7);
+    }
+    h2 {
+        position: relative;
+        color: #ffffff;  
+        font-size: 3rem;
+        line-height: 0.9;
+        text-align: center;
+    }
+</style>
+{% endblock title %}
+
+{% block nav_item %}
+<a href="#" class="navbar-brand">Hello, <b>{{request.user.username}}</b></a>
+{% endblock nav_item %}
+{% block content %}
+<div class="container">
+    <h2>MACHINE LEARNING BASED FRAUDULENT AND CLONE ACCOUNTS DETECTION IN SOCIAL MEDIA PLATFORMS</h2>
+</div>
+<div class="prediction-form">
+    <div class="login-form">
+        <form action="" method="POST">
+            {%csrf_token%}
+            <h3 class="text-center">Prediction Form</h3>       
+            <div class="form-group">
+                <label>Statuses Count:</label>
+                <!-- <input type="text" class="form-control" placeholder="Eg-25" required="required"> -->
+                {{form.statuses_count}}
+            </div>
+
+            
+            <div class="form-group">
+                <label>Followers Count:</label>
+                {{form.followers_count}}
+            </div>
+            
+            <div class="form-group">
+                <label>Friends Count:</label>
+                {{form.friends_count}}
+            </div>
+            
+            <div class="form-group">
+                <label>Favourites Count:</label>
+                {{form.favourites_count}}
+            </div>
+            
+            <div class="form-group">
+                <label>Listed Count:</label>
+                {{form.listed_count}}
+            </div>
+            
+            <div class="form-check">
+                <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> -->
+                {{form.geo_enabled|add_class:'form-check-input'}}
+                <label class="form-check-label" for="flexCheckDefault">
+                <label>Geo Enabled</label>
+                
+            </div>
+            
+            <div class="form-check">
+                <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> -->
+                {{form.user_profile_background_image|add_class:'form-check-input'}}
+                <label class="form-check-label" for="flexCheckDefault">
+                <label>User's Profile Background Image</label>
+                
+            </div>
+            
+            <!-- dropdown for languages-->
+            <div style="margin-bottom: 10px;" class="dropdown">
+                <label>Select Language:</label>
+                {{form.language|add_class:'btn btn-secondary dropdown-toggle'}}
+                    
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-block">Predict</button>
+            </div>
+                
+               
+            </div>        
+        </form>
+        
+    </div>
+</div>
+{% endblock content %}
+
